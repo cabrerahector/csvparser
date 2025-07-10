@@ -65,6 +65,9 @@ class CSVUploader
 
         if ( ! move_uploaded_file($_FILES['csv_file']['tmp_name'], $path) ) {
             error_log('Could not move file to uploads folder'); 
+        } else {
+            // Set file permissions
+            chmod($path, 0644);
         }
     }
 }
