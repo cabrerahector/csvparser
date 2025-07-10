@@ -1,0 +1,16 @@
+{
+  "name": "csv_parser",
+  "version": "1.0.0",
+  "description": "",
+  "license": "GPL",
+  "author": "Hector Cabrera <me@cabrerahector.com>",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "watch": "sass assets/scss:assets/css --watch",
+    "build": "sass assets/scss:assets/css --style=compressed"
+  },
+  "dependencies": {
+    "sass": "^1.89.2"
+  }
+}

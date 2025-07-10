@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+}
+
+/* Links */
+a {
+    color: red;
+}
+
+/* Form */
+form {
+    padding: 1.5em;
+    width: 300px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    label {
+        display: block;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    input[type="file"] {
+        padding: 0.5em;
+        width: 100%;
+        border: #777 1px solid;
+        border-radius: 3px;
+    }
+
+    label,
+    input {
+        margin-bottom: 0.5em;
+    }
+
+    label,
+    input,
+    button {
+        box-sizing: inherit;
+    }
+
+    button {
+        display: block;
+        cursor: pointer;
+        padding: 0.75em;
+        width: 100%;
+        color: #fff;
+        font-weight: 600;
+        background: #ef233c;
+        border: none;
+        border-radius: 5px;
+        transition: background 0.15s ease-in;
+
+        &:focus,
+        &:hover {
+            background: #a61729;
+        }
+    }
+}
+
+/* main */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    table {
+        margin-top: 2rem;
+        padding: 0;
+        border: #f0f0f0 1px solid;
+        border-collapse: collapse;
+
+        thead,
+        tbody {
+
+            tr {
+
+                th,
+                td {
+                    padding: 1rem;
+                    border-bottom: #f0f0f0 1px solid;
+                }
+            }
+        }
+
+        tbody {
+
+            tr {
+
+                &:nth-child(odd) {
+
+                    td {
+                        background-color: #f9f9f9;
+                    }
+                }
+
+                &:nth-child(even) {
+
+                    td {
+                        background-color: #fff;
+                    }
+                }
+
+                &:last-child {
+
+                    td {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+
+        tbody,
+        tfoot {
+
+            tr {
+
+                td {
+
+                    &.red-text {
+                        color: #a61729;
+                    }
+
+                    &.green-text {
+                        color: #32a852;
+                    }
+                }
+            }
+        }
+
+        tfoot {
+
+            tr {
+
+                td {
+                    padding: 0.75rem 1rem 0;
+                    font-size: 0.8em;
+                    font-weight: 600;
+                    background: #f9f9f9;
+                    border-bottom: none;
+                }
+
+                &:first-of-type {
+
+                    td {
+                        border-top: #999 2px solid;
+                    }
+                }
+
+                &:last-of-type {
+
+                    td {
+                        padding-bottom: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
+}
