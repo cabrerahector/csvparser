@@ -1,3 +1,8 @@
+<?php
+// Handle .csv uploads
+require 'inc/class.csvuploader.php';
+$csv_uploader = new CSVUploader();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

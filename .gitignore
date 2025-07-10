@@ -1,2 +1,5 @@
+# Ignore uploads folder
+/uploads
+
 Thumbs.db
 node_modules
