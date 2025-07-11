@@ -70,4 +70,14 @@ class CSVUploader
             chmod($path, 0644);
         }
     }
+
+    /**
+     * Prevents re-POST on page refresh.
+     */
+    public function maybe_replace_history_state()
+    {
+        if ( isset($_FILES['csv_file']['error']) ) {
+            echo '<script>history.replaceState(null, document.title, location.href);</script>';
+        }
+    }
 }
