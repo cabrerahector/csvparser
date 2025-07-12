@@ -13,10 +13,19 @@ class CSVUploader
     private $uploads_dir;
 
     /**
+     * Captures error message, if any.
+     *
+     * @access private
+     * @var    string
+     */
+    private $error;
+
+    /**
      * Construct
      */
     public function __construct()
     {
+        $this->error = '';
         $this->uploads_dir = dirname(__FILE__, 2) . DIRECTORY_SEPARATOR . 'uploads';
 
         if ( isset($_FILES['csv_file']['error']) ) {
@@ -31,16 +40,19 @@ class CSVUploader
     {
         // Multiple file uploads? Bail.
         if ( is_array($_FILES['csv_file']['error']) ) {
+            $this->error = 'invalid_upload';
             return;
         }
 
         // Something went wrong with the upload, bail.
         if ( $_FILES['csv_file']['error'] !== UPLOAD_ERR_OK ) {
+            $this->error = 'invalid_upload';
             return;
         }
 
         // File is too big, bail.
         if ( $_FILES['csv_file']['size'] > 10485760 ) { // 10485760 = 10 MB
+            $this->error = 'upload_too_big';
             return;
         }
 
@@ -52,6 +64,7 @@ class CSVUploader
 
         // This doesn't seem to be a valid .csv file, bail.
         if ( ! in_array($upload_file_ext, $allowed_mime_types) ) {
+            $this->error = 'invalid_file';
             return;
         }
 
@@ -64,7 +77,7 @@ class CSVUploader
         }
 
         if ( ! move_uploaded_file($_FILES['csv_file']['tmp_name'], $path) ) {
-            error_log('Could not move file to uploads folder'); 
+            $this->error = 'could_not_upload';
         } else {
             // Set file permissions
             chmod($path, 0644);
@@ -79,5 +92,15 @@ class CSVUploader
         if ( isset($_FILES['csv_file']['error']) ) {
             echo '<script>history.replaceState(null, document.title, location.href);</script>';
         }
+    }
+
+    /**
+     * Returns error message, if any.
+     *
+     * @return string
+     */
+    public function has_error()
+    {
+        return $this->error;
     }
 }

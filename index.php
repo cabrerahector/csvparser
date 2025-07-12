@@ -43,6 +43,32 @@ $table_builder = new TableBuilder($data, $exchange_api);
             <label for="csv_file">Select your .csv file:</label>
             <input type="file" id="csv_file" name="csv_file" accept=".csv" required />
             <button>Upload</button>
+
+            <?php
+            if ( $csv_uploader->has_error() ) {
+                $error_msg = '';
+
+                switch( $csv_uploader->has_error() ) {
+                    case 'invalid_upload':
+                        $error_msg = 'Invalid upload, please try again.';
+                        break;
+                    case 'upload_too_big':
+                        $error_msg = 'File is too big.';
+                        break;
+                    case 'invalid_file':
+                        $error_msg = 'Invalid file format. Must be .csv.';
+                        break;
+                    case 'could_not_upload':
+                        $error_msg = 'Could not upload file, please try again later.';
+                        break;
+                    default:
+                        $error_msg = 'Invalid upload, please try again.';
+                        break;
+                }
+
+                echo '<p class="error">' . $error_msg . '</p>';
+            }
+            ?>
         </form>
 
         <?php echo $table_builder->build(); ?>
