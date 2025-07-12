@@ -9,18 +9,19 @@ class CSVLoader
 {
     /**
      * Path to the uploads folder.
+     *
+     * @access private
+     * @var    string
      */
     private $uploads_dir;
 
     /**
      * File handle.
+     *
+     * @access private
+     * @var    resource
      */
     private $handle;
-
-    /**
-     * 
-     */
-    private $required_columns;
 
     /**
      * Construct

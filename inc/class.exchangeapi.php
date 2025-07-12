@@ -1,6 +1,8 @@
 <?php
 /**
- * 
+ * Pulls data from the exchange Rate API
+ *
+ * @author Hector Cabrera <me@cabrerahector.com>
  */
 class ExchangeAPI
 {
@@ -30,7 +32,7 @@ class ExchangeAPI
      * @param  string      $to  Currency Symbol (eg. CAD)
      * @return float|null  Exchange rate, or null on failure
      */
-    public function get_latest_rate($to)
+    public function get_latest_rate(string $to)
     {
         $response = null;
 
