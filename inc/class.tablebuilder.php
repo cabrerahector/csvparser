@@ -172,20 +172,36 @@ class TableBuilder
 
                 $item_profit_margin = $item_price - $item_cost;
                 $item_total_profit = $item_profit_margin * $item_qty;
-                $item_total_profit_cad = ( is_float($this->exchange_rate) ) ? '$' . number_format(( $item_total_profit * $this->exchange_rate ), 2) : 'N/A';
+                $item_total_profit_cad = ( is_float($this->exchange_rate) ) ? ( $item_total_profit * $this->exchange_rate ) : 'N/A';
 
                 $this->data[$i] = [...$this->data[$i], $item_profit_margin, $item_total_profit, $item_total_profit_cad];
 
                 for($j = 0; $j < count($this->data[$i]); $j++) {
-                    if ( isset($data_col_index[$j]) ) {
-                        $value = ( 'qty' !== $data_col_index[$j] ) 
-                            ? '$' . number_format($this->data[$i][$j], 2)
-                            : number_format($this->data[$i][$j], 0);
+                    $css_class = '';
+
+                    if (
+                        isset($data_col_index[$j]) 
+                        || ( $j === count($this->data[$i]) - 1 )
+                    ) {
+
+                        if ( isset($data_col_index[$j]) ) {
+                            $value = ( 'qty' !== $data_col_index[$j] )
+                                ? '$' . number_format(abs($this->data[$i][$j]), 2)
+                                : number_format($this->data[$i][$j], 0);
+                        } else {
+                            if ( 'N/A' !== $this->data[$i][$j] ) {
+                                $value = '$' . number_format(abs($this->data[$i][$j]), 2);
+                            }
+                        }
+
+                        if ( 'N/A' !== $this->data[$i][$j] ) {
+                            $css_class = ( $this->data[$i][$j] > 0 ) ? 'green-text' : ($this->data[$i][$j] < 0 ? 'red-text' : '');
+                        }
                     } else {
                         $value = htmlentities($this->data[$i][$j], ENT_QUOTES);
                     }
 
-                    $tbody .= '<td>' . $value . '</td>';
+                    $tbody .= '<td class="' . $css_class . '">' . $value . '</td>';
                 }
 
                 $tbody .= '</tr>';
