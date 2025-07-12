@@ -1,4 +1,11 @@
 <?php
+// App config
+require 'config.php';
+
+// Instantiate ExchangeAPI
+require 'inc/class.exchangeapi.php';
+$exchange_api = new ExchangeAPI();
+
 // Handle .csv uploads
 require 'inc/class.csvuploader.php';
 $csv_uploader = new CSVUploader();
@@ -13,7 +20,7 @@ $data = $csv_parser->parse();
 
 // Create TableBuilder instance
 require 'inc/class.tablebuilder.php';
-$table_builder = new TableBuilder($data);
+$table_builder = new TableBuilder($data, $exchange_api);
 ?>
 <!DOCTYPE html>
 <html lang="en">

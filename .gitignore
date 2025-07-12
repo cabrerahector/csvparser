@@ -1,3 +1,9 @@
+# Ignore local config file
+config.php
+
+# Ignore cache folder
+/cache
+
 # Ignore uploads folder
 /uploads
 
