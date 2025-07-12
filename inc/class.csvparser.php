@@ -131,7 +131,7 @@ class CSVParser
                     // Let's do a little cleanup
                     $data = $currRow[$currIndex];
                     $data = str_replace('+AC0', '', $data); // @TODO: Not entirely sure where +AC0 is coming from
-                    $data = trim(preg_replace("/[^A-Za-z0-9-]/", '', $data));
+                    $data = trim(preg_replace("/[^A-Za-z0-9-.]/", '', $data));
 
                     // Append the data in the appropriate column to the row output buffer
                     $currOutput[] = $data;
