@@ -59,7 +59,7 @@ class CSVParser
         if ( is_resource($fh) ) {
             $column_names = fgetcsv($fh);
 
-            if ( ! empty($column_names) ) {
+            if ( ! empty($column_names[0]) ) {
                 $column_names = array_map(function($name) {
                     return trim(strtolower(preg_replace("/[^A-Za-z]/", '', $name)));
                 }, $column_names);
